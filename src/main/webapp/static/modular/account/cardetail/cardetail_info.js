@@ -95,5 +95,15 @@ CardetailInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+	var ajax = new $ax(Feng.ctxPath + "/dict/selectbyparentcodelist", function (data) {
+		var strHtml ="";
+        $.each(data,function(key, val){
+        	strHtml+='<option value="'+val.code+'">'+val.name+'</option>';
+        })
+        $("#item").html(strHtml);
+    }, function (data) {
+        Feng.error("页面初始化失败!");
+    });
+    ajax.set("code", "car_item");
+    ajax.start();
 });

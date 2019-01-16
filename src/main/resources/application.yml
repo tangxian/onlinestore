@@ -1,8 +1,19 @@
 quartz:
   enabled: true
-
-server:
+#使用http协议时，http：注释； server: port: 8080即可 
+http:
   port: 8080
+  
+server:
+  #端口号
+  port: 8443
+  ssl:
+    #生成证书的名字
+    key-store: SpringBootTomcat.keystore
+    #密钥库密码
+    key-store-password: 123456
+    key-store-type: JKS
+    key-alias: SpringBootTomcat
 
 guns:
   swagger-open: true              #是否开启swagger (true/false)

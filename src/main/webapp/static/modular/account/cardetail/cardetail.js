@@ -98,6 +98,6 @@ Cardetail.search = function () {
 $(function () {
     var defaultColunms = Cardetail.initColumn();
     var table = new BSTable(Cardetail.id, "/cardetail/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     Cardetail.table = table.init();
 });

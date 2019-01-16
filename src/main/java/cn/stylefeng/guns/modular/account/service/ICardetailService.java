@@ -1,11 +1,13 @@
 package cn.stylefeng.guns.modular.account.service;
 
 import cn.stylefeng.guns.modular.system.model.Cardetail;
+import cn.stylefeng.guns.modular.system.model.OperationLog;
 import cn.stylefeng.roses.core.datascope.DataScope;
 
 import java.util.List;
 import java.util.Map;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -20,5 +22,5 @@ public interface ICardetailService extends IService<Cardetail> {
 	/**
      * 根据条件查询养车开支列表
      */
-    List<Map<String, Object>> selectCardetail(String beginTime, String endTime, Integer itemid);
+    List<Map<String, Object>> selectCardetail(Page<OperationLog> page, String beginTime, String endTime, Integer itemid);
 }

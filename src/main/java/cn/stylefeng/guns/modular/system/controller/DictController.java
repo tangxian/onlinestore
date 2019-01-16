@@ -21,19 +21,25 @@ import cn.stylefeng.guns.core.common.constant.Const;
 import cn.stylefeng.guns.core.common.constant.dictmap.DictMap;
 import cn.stylefeng.guns.core.common.constant.factory.ConstantFactory;
 import cn.stylefeng.guns.core.common.exception.BizExceptionEnum;
+import cn.stylefeng.guns.core.common.node.ZTreeNode;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
 import cn.stylefeng.guns.modular.system.model.Dict;
+import cn.stylefeng.guns.modular.system.service.IDeptService;
 import cn.stylefeng.guns.modular.system.service.IDictService;
 import cn.stylefeng.guns.modular.system.warpper.DictWarpper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -54,6 +60,8 @@ public class DictController extends BaseController {
 
     @Autowired
     private IDictService dictService;
+    @Autowired
+    private IDeptService deptService;
 
     /**
      * 跳转到字典管理首页
@@ -111,6 +119,16 @@ public class DictController extends BaseController {
     public Object list(String condition) {
         List<Map<String, Object>> list = this.dictService.list(condition);
         return super.warpObject(new DictWarpper(list));
+    }
+    
+    /**
+     * 根据父类编码获取词典列表
+     */
+    @RequestMapping(value = "/selectbyparentcodelist")
+    @ResponseBody
+    public List<Dict> selectbyparentcodelist(String code) {
+    	List<Dict> list = this.dictService.selectByParentCode(code);
+        return list;
     }
 
     /**

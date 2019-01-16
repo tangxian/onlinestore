@@ -39,7 +39,7 @@ public class GunsProperties {
 
     private Boolean swaggerOpen = false;
 
-    private String fileUploadPath;
+    private String fileUploadPath = "D:\\uploadSystem";
 
     private Boolean haveCreatePath = false;
 

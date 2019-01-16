@@ -1,25 +1,33 @@
 package cn.stylefeng.guns.modular.account.controller;
 
 import cn.stylefeng.roses.core.base.controller.BaseController;
-import cn.stylefeng.roses.core.datascope.DataScope;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.baomidou.mybatisplus.plugins.Page;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.stylefeng.guns.core.common.annotion.Permission;
+import cn.stylefeng.guns.core.common.constant.factory.PageFactory;
+import cn.stylefeng.guns.core.common.page.PageInfoBT;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
 import cn.stylefeng.guns.core.shiro.ShiroKit;
+import cn.stylefeng.guns.core.shiro.ShiroUser;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import cn.stylefeng.guns.modular.system.model.Cardetail;
+import cn.stylefeng.guns.modular.system.model.OperationLog;
+import cn.stylefeng.guns.modular.system.warpper.LogWarpper;
 import cn.stylefeng.guns.modular.account.service.ICardetailService;
 import cn.stylefeng.guns.modular.account.warpper.CardetailWarpper;
 
@@ -72,9 +80,12 @@ public class CardetailController extends BaseController {
     @Permission
     @ResponseBody
     public Object list(@RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) Integer itemid) {
-    	List<Map<String, Object>> cardetail = cardetailService.selectCardetail(beginTime, endTime, itemid);
+    	Page<OperationLog> page = new PageFactory<OperationLog>().defaultPage();
+    	List<Map<String, Object>> cardetail = cardetailService.selectCardetail(page, beginTime, endTime, itemid);
         //return cardetailService.selectList(null);
-    	return new CardetailWarpper(cardetail).wrap();
+    	//return new CardetailWarpper(cardetail).wrap();
+    	page.setRecords(new CardetailWarpper(cardetail).wrap());
+        return new PageInfoBT<>(page);
     }
 
     /**
@@ -83,6 +94,9 @@ public class CardetailController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Cardetail cardetail) {
+    	ShiroUser shiroUser = ShiroKit.getUser();
+    	cardetail.setTime(new Date());
+    	cardetail.setUserid(shiroUser.getId());
         cardetailService.insert(cardetail);
         return SUCCESS_TIP;
     }

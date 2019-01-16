@@ -1,6 +1,7 @@
 package cn.stylefeng.guns.modular.system.dao;
 
 import cn.stylefeng.guns.modular.system.model.Cardetail;
+import cn.stylefeng.guns.modular.system.model.OperationLog;
 import cn.stylefeng.roses.core.datascope.DataScope;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
 
 /**
  * <p>
@@ -22,5 +24,5 @@ public interface CardetailMapper extends BaseMapper<Cardetail> {
 	/**
      * 根据条件查询用户列表
      */
-    List<Map<String, Object>> selectCardetail(@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("itemid") Integer itemid);
+    List<Map<String, Object>> selectCardetail(@Param("page") Page<OperationLog> page, @Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("itemid") Integer itemid);
 }
