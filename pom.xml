@@ -13,10 +13,9 @@
     <artifactId>guns</artifactId>
     <version>1.0.0</version>
 
-    <name>guns-admin</name>
-    <description>guns 的spring boot版本</description>
+    <name>guns</name>
 
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -237,4 +236,5 @@
         </profile>
     </profiles>
 
+    <description>2.0.1</description>
 </project>
