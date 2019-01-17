@@ -95,6 +95,13 @@ CardetailInfoDlg.editSubmit = function() {
 }
 
 $(function() {
+	// 初始化头像上传
+    var fileUp = new $WebUpload("testfile");
+    fileUp.setUploadBarId("progressBar");
+    fileUp.init();
+	/**
+	 * 查询养车开销项目下拉框
+	 */
 	var ajax = new $ax(Feng.ctxPath + "/dict/selectbyparentcodelist", function (data) {
 		var strHtml ="";
         $.each(data,function(key, val){
