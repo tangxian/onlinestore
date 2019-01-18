@@ -40,8 +40,8 @@ spring:
       exclude: static/**,WEB-INF/view/**
   servlet:
     multipart:
-      max-request-size: 100MB
-      max-file-size: 100MB
+      max-request-size: 500MB
+      max-file-size: 500MB
 
 mybatis-plus:
   typeAliasesPackage: cn.stylefeng.guns.modular.system.model

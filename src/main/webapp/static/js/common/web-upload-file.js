@@ -15,7 +15,7 @@
 		this.uploadBtnId = fileId + "BtnId";
 		this.uploadPreId = fileId + "PreId";
 		this.uploadUrl = Feng.ctxPath + '/cardetail/uploadfile';
-		this.fileSizeLimit = 100 * 1024 * 1024;
+		this.fileSizeLimit = 500 * 1024 * 1024;
         this.uploadBarId = null;
 	};
 
@@ -57,12 +57,14 @@
 			var me =  this;
 			// 文件上传过程中创建进度条实时显示。
 			bindedObj.on('uploadProgress', function(file, percentage) {
-                $("#"+me.uploadBarId).css("width",percentage * 100 + "%");
+				$("#"+me.uploadBarId+"Num").html("上传进度："+(percentage * 100).toFixed(2) + "%");
+				$("#"+me.uploadBarId).css("width",percentage * 100 + "%");
 			});
 
 			// 文件上传成功，给item添加成功class, 用样式标记上传成功。
 			bindedObj.on('uploadSuccess', function(file,response) {
 				Feng.success("上传成功");
+				$("#"+me.fileId+"filename").val(file.name);
 				$("#" + me.fileId).val(response);
 			});
 
