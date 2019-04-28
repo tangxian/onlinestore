@@ -13,7 +13,7 @@
     <artifactId>guns</artifactId>
     <version>1.0.0</version>
 
-    <name>guns</name>
+    <name>onlinestore</name>
 
     <packaging>war</packaging>
 
